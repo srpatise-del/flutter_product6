@@ -11,7 +11,7 @@ header("Content-Type: application/json; charset=UTF-8");
 $host = "localhost";
 $username = "root";
 $password = "";
-$dbname = "product";
+$dbname = "shop";
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);

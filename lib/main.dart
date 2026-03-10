@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import 'add_product_page.dart';
 import 'edit_product_page.dart';
+import 'login.dart';  //เพิ่ม
 
 void main() => runApp(const MyApp());
 
@@ -24,9 +25,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: ProductList(),
+      //home: ProductList(),
+      home: LoginPage(),  // เปิดแอปครั้งแรกเข้าหน้า Login    
       debugShowCheckedModeBanner: false,
     );
+    
   }
 }
 
@@ -35,7 +38,9 @@ class MyApp extends StatelessWidget {
 //////////////////////////////////////////////////////////////
 
 class ProductList extends StatefulWidget {
-  const ProductList({super.key});
+  final String name ; //เพิ่ม
+
+  const ProductList({super.key,required this.name}); //เพิ่ม
 
   @override
   State<ProductList> createState() => _ProductListState();
@@ -157,8 +162,32 @@ class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Product List')),
+      appBar: AppBar(title: const Text('Product List'),
 
+      actions: [
+              Text(
+              "Welcome ${widget.name} :",
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LoginPage(),
+                ),
+                (route) => false,
+              );
+
+            },
+          ),
+        ],),
+      
+      
       body: Column(
         children: [
           //////////////////////////////////////////////////////
